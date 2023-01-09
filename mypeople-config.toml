@@ -1,0 +1,5 @@
+DbDriver = "sqlite3"
+DbSource = "/home/mr-papi/SoftwareCode/Projects/mypeople/db/mypeople.db"
+DbSourceMem = ":memory:"
+DbSourceDev = "/home/mr-papi/SoftwareCode/Projects/mypeople/db/mypeople_test.db"
+LogFile = "/home/mr-papi/SoftwareCode/Projects/mypeople/mypeople.log"

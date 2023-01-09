@@ -1,0 +1,12 @@
+# directories
+util/
+bin/
+# data/
+
+
+# files
+.env
+.envrc
+
+
+# regular expressions
