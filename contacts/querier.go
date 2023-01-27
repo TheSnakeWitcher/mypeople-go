@@ -9,7 +9,7 @@ import (
 )
 
 type Querier interface {
-	AddPeople(ctx context.Context, name string) (People, error)
+	AddPeople(ctx context.Context, arg AddPeopleParams) (People, error)
 	AddPeopleGroup(ctx context.Context, arg AddPeopleGroupParams) (People, error)
 	DelPeople(ctx context.Context, name string) error
 	//------------------------------

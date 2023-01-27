@@ -7,15 +7,17 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/TheSnakeWitcher/mypeople/contacts"
 	"github.com/spf13/cobra"
 )
 
-var ( picPath string
+var (
+    picPath string
 )
 
 var addCmd = &cobra.Command{
 	Use:   "add",
-	Short: "add a new people",
+	Short: "add new contact",
 	Long:  `long description here`,
 	Run: func(cmd *cobra.Command, args []string) {
 		logger := Logger.With().Logger()
@@ -27,7 +29,13 @@ var addCmd = &cobra.Command{
 		    fmt.Println("error: ",NoArgErr)
 
 		case checkSingleArg(args):
-			people, err := Queries.AddPeople(context.Background(), args[0])
+			people, err := Queries.AddPeople(
+			    context.Background(),
+                contacts.AddPeopleParams{
+                    args[0],
+                    picPath,
+                },
+            )
 			if err != nil {
 				logger.Error().Err(err).Msg("add people op")
 			}
@@ -35,7 +43,10 @@ var addCmd = &cobra.Command{
 
 		case checkMultiArg(args):
 			for i, _ := range args {
-				_, err := Queries.AddPeople(context.Background(), args[i])
+				_, err := Queries.AddPeople(
+				    context.Background(),
+				    contacts.AddPeopleParams{args[i],picPath},
+				)
 				if err != nil {
 					logger.Error().Err(err).Msg("add people operation ")
 				}
@@ -47,14 +58,5 @@ var addCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(addCmd)
 
-    // set args
-	//addCmd.SetArgs([]string{"pic"})
-
-    // persist to all subcommands
-	// addCmd.PersistentFlags().String("foo", "", "A help for foo") 
-
-    // flags which will only run when this command
-	//addCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle") 
-	addCmd.Flags().StringVarP(&picPath,"pic","p","","picture")
-
+	addCmd.Flags().StringVarP(&picPath,"pic","p","","path to contact picture")
 }
