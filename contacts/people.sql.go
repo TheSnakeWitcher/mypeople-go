@@ -13,11 +13,16 @@ const addPeople = `-- name: AddPeople :one
 ;
 
 INSERT INTO people(id,name, pic, groups, emails, phones, social_nets, wallets, locations, events, notes)
-VALUES(NULL,?,'','[]','[]','[]','[]','[]','[]','[]','[]') RETURNING id, name, pic, "groups", emails, phones, social_nets, wallets, locations, events, notes
+VALUES(NULL,?,?,'[]','[]','[]','[]','[]','[]','[]','[]') RETURNING id, name, pic, "groups", emails, phones, social_nets, wallets, locations, events, notes
 `
 
-func (q *Queries) AddPeople(ctx context.Context, name string) (People, error) {
-	row := q.db.QueryRowContext(ctx, addPeople, name)
+type AddPeopleParams struct {
+	Name string `db:"name" json:"name"`
+	Pic  string `db:"pic" json:"pic"`
+}
+
+func (q *Queries) AddPeople(ctx context.Context, arg AddPeopleParams) (People, error) {
+	row := q.db.QueryRowContext(ctx, addPeople, arg.Name, arg.Pic)
 	var i People
 	err := row.Scan(
 		&i.ID,
