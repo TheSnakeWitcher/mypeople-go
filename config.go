@@ -17,11 +17,11 @@ const (
 )
 
 type configuration struct {
-	LogFile      string `mapstructure:LogFile`
-	DbDriver     string `mapstructure:DbDriver`
-	DbSource     string `mapstructure:DbSource`
-	DbSourceMem  string `mapstructure:DbSourceMem`
-	DbSourceDev string `mapstructure:DbSourceDev`
+	LogFile     string `mapstructure:"LogFile"`
+	DbDriver    string `mapstructure:"DbDriver"`
+	DbSource    string `mapstructure:"DbSource"`
+	DbSourceMem string `mapstructure:"DbSourceMem"`
+	DbSourceDev string `mapstructure:"DbSourceDev"`
 }
 
 var (
