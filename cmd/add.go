@@ -28,6 +28,9 @@ var addCmd = &cobra.Command{
 			logger.Error().Err(NoArgErr)
 		    fmt.Println("error: ",NoArgErr)
 
+		case checkMultiArg(args):
+			logger.Error().Err(MultiArgErr)
+		    fmt.Println("error: ",MultiArgErr)
 		case checkSingleArg(args):
 			people, err := Queries.AddPeople(
 			    context.Background(),
@@ -40,19 +43,8 @@ var addCmd = &cobra.Command{
 				logger.Error().Err(err).Msg("add people op")
 			}
 			fmt.Println("people added: ", people)
-
-		case checkMultiArg(args):
-			for i, _ := range args {
-				_, err := Queries.AddPeople(
-				    context.Background(),
-				    contacts.AddPeopleParams{args[i],picPath},
-				)
-				if err != nil {
-					logger.Error().Err(err).Msg("add people operation ")
-				}
-			}
 		}
-	},
+    },
 }
 
 func init() {

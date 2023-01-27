@@ -1,7 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
@@ -23,6 +19,7 @@ var (
 var (
     UnknowErr = errors.New("unknow")
     NoArgErr = errors.New("not args provided")
+    MultiArgErr = errors.New("multiple args not acepted")
 )
 
 var(
@@ -69,12 +66,10 @@ func Execute(db *sql.DB,logger zerolog.Logger) {
 	Logger = logger
 	Queries = contacts.New(db)
 
- 
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
 	}
-
 }
 
 func init() {
