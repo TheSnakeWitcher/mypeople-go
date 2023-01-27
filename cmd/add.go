@@ -31,12 +31,13 @@ var addCmd = &cobra.Command{
 		case checkMultiArg(args):
 			logger.Error().Err(MultiArgErr)
 		    fmt.Println("error: ",MultiArgErr)
+
 		case checkSingleArg(args):
 			people, err := Queries.AddPeople(
 			    context.Background(),
                 contacts.AddPeopleParams{
-                    args[0],
-                    picPath,
+                    Name: args[0],
+                    Pic: picPath,
                 },
             )
 			if err != nil {
