@@ -5,8 +5,9 @@ bin/
 
 
 # files
-.env
-.envrc
+*.env
+*.envrc
 
 
 # regular expressions
+*.db
