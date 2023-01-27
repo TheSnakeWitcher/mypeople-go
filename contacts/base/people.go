@@ -20,20 +20,20 @@ type PeopleData struct {
 	PeopleDataOpts
 }
 
-func NewPeopleData(id int64, name, pic string, arg PeopleDataOpts) *PeopleData {
+func NewPeopleData(id int64, name, pic string, opts PeopleDataOpts) *PeopleData {
 	return &PeopleData{
 		id,
 		name,
 		pic,
 		PeopleDataOpts{
-			Groups:     arg.Groups,
-			Emails:     arg.Emails,
-			Phones:     arg.Phones,
-			SocialNets: arg.SocialNets,
-			Wallets:    arg.Wallets,
-			Locations:  arg.Locations,
-			Events:     arg.Events,
-			Notes:      arg.Notes,
+			Groups:     opts.Groups,
+			Emails:     opts.Emails,
+			Phones:     opts.Phones,
+			SocialNets: opts.SocialNets,
+			Wallets:    opts.Wallets,
+			Locations:  opts.Locations,
+			Events:     opts.Events,
+			Notes:      opts.Notes,
 		},
 	}
 }

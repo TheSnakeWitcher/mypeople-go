@@ -9,9 +9,6 @@ type Event struct {
 	Name          string    `json:"name"`
 	Date          time.Time `json:"date"`
     EventOpts
-	//Requirements  []string  `json:"requirements"`
-	//RelatedPeople []string  `json:"related_people"`
-	//Notes         []string  `json:"notes"`
 }
 
 type EventOpts struct {
@@ -47,15 +44,3 @@ func (self Event) JsonString() string {
 	}
 	return string(data)
 }
-
-//type EventBook struct {
-//	events map[string]Event
-//}
-//
-//func (self *EventBook) DelByName(name string) bool {
-//	if _, ok := self.events[name]; ok {
-//		delete(self.events, name)
-//		return true
-//	}
-//	return false
-//}

@@ -4,12 +4,9 @@ import "encoding/json"
 
 type Product struct {
 	Name    string   `json:"name"`
-	//Pic     string   `json:"pic"`
 	Price   string   `json:"price"`
 	Qty     int64    `json:"qty"`
 	ProductOpts
-	//Details string   `json:"details"`
-	//Notes   []string `json:"notes"`
 }
 
 type ProductOpts struct {

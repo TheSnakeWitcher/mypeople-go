@@ -5,10 +5,6 @@ import "encoding/json"
 type Location struct {
 	Name        string   `json:"name"`
     LocationOpts	
-	//Pic         string   `json:"pic"`
-	//Address     string   `json:"address"`
-	//Coordinates string   `json:"coordinates"`
-	//Notes       []string `json:"notes"`
 }
 
 type LocationOpts struct {
