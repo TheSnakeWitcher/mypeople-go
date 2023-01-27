@@ -5,9 +5,7 @@ import (
 )
 
 type BookType interface {
-	[]string |
-	Event |
-	Location
+	[]string | Event | Location
 }
 
 type Book[T BookType] map[string]T

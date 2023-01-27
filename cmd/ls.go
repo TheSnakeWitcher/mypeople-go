@@ -1,6 +1,3 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-*/
 package cmd
 
 import (
@@ -10,6 +7,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"github.com/TheSnakeWitcher/mypeople/contacts/base"
 )
 
 
@@ -18,18 +16,24 @@ var lsCmd = &cobra.Command{
 	Short: "list contacts",
 	Long: `additional filter options here`,
 	Run: func(cmd *cobra.Command, args []string) {
+	    if !checkNoArg(args) {
+	        fmt.Println("error: arguments provided")
+	        return
+	    }
+
 	    logger := Logger.With().Logger()
-	    data ,err := Queries.ListPeople(context.Background())
+	    contacts ,err := Queries.ListPeople(context.Background())
 	    if err != nil {
 	        logger.Error().Err(errors.New("failed to list people"))
 	    }
-	    //fmtData := make([]*base.PeopleData,len(data))
-	    //for i,_ := range data {
-	    //    fmtData[i] = data[i].ToPeopleData()
-	    //}
+
+	    fmtData := make([]*base.PeopleData,len(contacts))
+	    for i , contact := range contacts {
+	        fmtData[i] = contact.ToPeopleData()
+	    }
 
 	    if jsonFlag {
-	        printData , err := json.MarshalIndent(data,"","\t")
+	        printData , err := json.MarshalIndent(fmtData,"","\t")
 	        if err != nil {
 	           logger.Error().Err(err).Msg("failed to list output as json")
 	        }
@@ -37,9 +41,10 @@ var lsCmd = &cobra.Command{
 	        return
 	    }
 
-	    fmt.Println(data)
+	    fmt.Println(contacts)
 	},
 }
+
 
 func init() {
 	rootCmd.AddCommand(lsCmd)
