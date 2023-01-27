@@ -13,7 +13,7 @@ const addPeople = `-- name: AddPeople :one
 ;
 
 INSERT INTO people(id,name, pic, groups, emails, phones, social_nets, wallets, locations, events, notes)
-VALUES(NULL,?,?,'[]','[]','[]','[]','[]','[]','[]','[]') RETURNING id, name, pic, "groups", emails, phones, social_nets, wallets, locations, events, notes
+VALUES(NULL,?,?,'[]','{}','{}','{}','{}','{}','{}','[]') RETURNING id, name, pic, "groups", emails, phones, social_nets, wallets, locations, events, notes
 `
 
 type AddPeopleParams struct {

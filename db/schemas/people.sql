@@ -1,4 +1,4 @@
-CREATE TABLE people (
+CREATE TABLE IF NOT EXISTS people (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
   	pic TEXT NOT NULL,

@@ -10,7 +10,7 @@ SELECT * FROM people ORDER BY name ;
 
 -- name: AddPeople :one
 INSERT INTO people(id,name, pic, groups, emails, phones, social_nets, wallets, locations, events, notes)
-VALUES(NULL,?,?,'[]','[]','[]','[]','[]','[]','[]','[]') RETURNING * ;
+VALUES(NULL,?,?,'[]','{}','{}','{}','{}','{}','{}','[]') RETURNING * ;
 
 -- name: DelPeople :exec
 DELETE FROM people WHERE name = ? ;
