@@ -6,7 +6,6 @@ package contacts
 
 import (
 	"context"
-	"database/sql"
 )
 
 type Querier interface {
@@ -20,7 +19,7 @@ type Querier interface {
 	//------------------------------
 	// groups
 	//------------------------------
-	GetPeopleGroups(ctx context.Context, name string) (sql.NullString, error)
+	GetPeopleGroups(ctx context.Context, name string) (string, error)
 	ListPeople(ctx context.Context) ([]People, error)
 }
 

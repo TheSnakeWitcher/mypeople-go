@@ -4,20 +4,18 @@
 
 package contacts
 
-import (
-	"database/sql"
-)
+import ()
 
 type People struct {
-	ID         int64          `db:"id" json:"id"`
-	Name       string         `db:"name" json:"name"`
-	Pic        sql.NullString `db:"pic" json:"pic"`
-	Groups     sql.NullString `db:"groups" json:"groups"`
-	Emails     sql.NullString `db:"emails" json:"emails"`
-	Phones     sql.NullString `db:"phones" json:"phones"`
-	SocialNets sql.NullString `db:"social_nets" json:"social_nets"`
-	Wallets    sql.NullString `db:"wallets" json:"wallets"`
-	Locations  sql.NullString `db:"locations" json:"locations"`
-	Events     sql.NullString `db:"events" json:"events"`
-	Notes      sql.NullString `db:"notes" json:"notes"`
+	ID         int64  `db:"id" json:"id"`
+	Name       string `db:"name" json:"name"`
+	Pic        string `db:"pic" json:"pic"`
+	Groups     string `db:"groups" json:"groups"`
+	Emails     string `db:"emails" json:"emails"`
+	Phones     string `db:"phones" json:"phones"`
+	SocialNets string `db:"social_nets" json:"social_nets"`
+	Wallets    string `db:"wallets" json:"wallets"`
+	Locations  string `db:"locations" json:"locations"`
+	Events     string `db:"events" json:"events"`
+	Notes      string `db:"notes" json:"notes"`
 }

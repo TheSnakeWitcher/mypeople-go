@@ -12,7 +12,7 @@ BIN=./bin
 ##################################################
 # rules
 ##################################################
-build-all:
+build:
 	make build-linux
 	make build-windows
 
@@ -22,7 +22,7 @@ build-linux:
 build-windows:
 	go env -w GOOS=windows && go build -o $(BIN)/ ./...
 
-clean-all:
+clean:
 	make clean_linux
 	make clean_windows
 
@@ -36,7 +36,7 @@ run:
 	go run ./...
 
 test:
-	go test ./...
+	go test ./... -v
 
 gen-sql:
 	sqlc generate
@@ -44,13 +44,7 @@ gen-sql:
 gen-proto:
 	cd data && protoc --go_out=.. --go-grpc_out=.. ./*.proto
 
-.PHONY:
-	build
-	build_linux
-	build_windows
-	clean
-	clean_linux
-	clean_windows
-	test
-	gen-sql
-	gen-proto
+.PHONY:  build build-linux build-windows \
+ 	 	 clean clean-linux clean-windows \
+ 	 	 gen-sql gen-proto \
+ 	 	 test \

@@ -7,7 +7,6 @@ package contacts
 
 import (
 	"context"
-	"database/sql"
 )
 
 const addPeople = `-- name: AddPeople :one
@@ -115,9 +114,9 @@ SELECT groups FROM people WHERE name = ? LIMIT 1
 // ------------------------------
 // groups
 // ------------------------------
-func (q *Queries) GetPeopleGroups(ctx context.Context, name string) (sql.NullString, error) {
+func (q *Queries) GetPeopleGroups(ctx context.Context, name string) (string, error) {
 	row := q.db.QueryRowContext(ctx, getPeopleGroups, name)
-	var groups sql.NullString
+	var groups string
 	err := row.Scan(&groups)
 	return groups, err
 }

@@ -9,13 +9,15 @@ import (
 func (self *People) ToPeopleData() *base.PeopleData {
 	var arg = base.PeopleData{ID: self.ID, Name: self.Name}
 
-	if self.Pic.Valid {
-		arg.Pic = self.Pic.String
-	}
+    data,err := json.Marshal(self)
+    if err != nil {
+        fmt.Println("error marshaling in ToPeopleData: ",err)
+    }
 
-	if self.Groups.Valid {
-		json.Unmarshal([]byte(self.Groups.String), &arg.Groups)
-	}
+	err = json.Unmarshal(data,&arg)
+    if err != nil {
+        fmt.Println("error unmarshaling in ToPeopleData: ",err)
+    }
 
 	return &arg
 }
@@ -24,7 +26,7 @@ func (self People) String() string {
 	return fmt.Sprintf("\nid: %d  name: %s pic: %t groups: %s\n" ,
 		self.ID,
 		self.Name,
-		self.Pic.Valid,
-		self.Groups.String,
+		len(self.Pic) > 1,
+		self.Groups,
 	)   
 }

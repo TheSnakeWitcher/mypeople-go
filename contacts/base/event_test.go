@@ -1,19 +1,48 @@
 package base
 
 import (
-    "fmt"
-    "time"
-    "testing"
+	"testing"
+	"time"
+
+	//"github.com/stretchr/testify/suite"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 )
 
-func TestEvent(t *testing.T)  {
+//type TestEventSuite struct {
+//    suite.Suite
+//}
 
-    event := NewEvent(
-        "my event",
-        time.Now(),
-        EventOpts{ Requirements: []string{"my req"} },
+type TestEventMock struct { 
+    mock.Mock
+    Event
+}
+
+
+func TestEvent(t *testing.T)  {
+    var (
+        testDate = time.Now()
+        testName = "my event"
+        testRequirements = []string{"req"}
+        testRelatedPeople = []string{"people"}
+        testNotes = []string{"note"}
+
+        testEventOpts = EventOpts{ 
+            Requirements: testRequirements,
+            RelatedPeople: testRelatedPeople,
+            Notes: testNotes,
+        }
     )
 
-    fmt.Println("event json: ",event.Json())
-    fmt.Println("event json: ",event.JsonString())
+    event := NewEvent( testName, testDate, testEventOpts)
+
+    mockData := new(TestEventMock)
+    mockData.On("NewEvent",testName,testDate,testEventOpts).Return(event)
+    mockData.On("Json").Return(event.Json())
+
+
+    require.Equal(t,event.Name,testName)
+    require.Equal(t,event.Date,testDate)
+    assert.Equal(t,event.Requirements,testRequirements)
 }
